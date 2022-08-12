@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -25,17 +29,29 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+	
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.toUpperCase().charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(column, row);
+		}
+		catch (RuntimeException e) {
+			throw new InputMismatchException("Instantiating ChessPosition Error! Valid Values: A1 to H8.");
+		}
+	}
 
 	public static void printBoard(ChessPiece[][] pieces) {
 		System.out.println();
 		for (int i=0; i<pieces.length; i++) {
-			System.out.printf("%d ", 8 - i);
+			System.out.printf("%s%d %s", ANSI_PURPLE, 8 - i, ANSI_RESET);
 			for (int j=0; j<pieces.length; j++) {
 				printPiece(pieces[i][j]);
 			}
 			System.out.println();
 		}
-		System.out.println("  A B C D E F G H");
+		System.out.println(ANSI_PURPLE + "  A B C D E F G H" + ANSI_RESET);
 	}
 
 	private static void printPiece(ChessPiece piece) {

@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import boardgame.BoardException;
 import chess.ChessMatch;
+import chess.ChessPiece;
+import chess.ChessPosition;
 
 public class Program {
 
@@ -11,15 +13,18 @@ public class Program {
 
 		Scanner sc = new Scanner(System.in);
 		
-		try {
-			ChessMatch chessMatch = new ChessMatch();
-			UI.printBoard(chessMatch.getPieces());
-		}
-		catch (BoardException e) {
-			System.out.println(e.getMessage());
-		}
+		ChessMatch chessMatch = new ChessMatch();
 		
-		sc.close();
+		while (true) {
+			UI.printBoard(chessMatch.getPieces());
+			System.out.printf("%nSource: ");
+			ChessPosition source = UI.readChessPosition(sc);
+			
+			System.out.printf("%nTarget: ");
+			ChessPosition target = UI.readChessPosition(sc);
+			
+			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+		}
 
 	}
 
