@@ -57,10 +57,17 @@ public class UI {
 		printBoard(chessMatch.getPieces());
 		printCapturedPieces(captured);
 		System.out.printf("%nTurn: %d%n", chessMatch.getTurn());
+		
+		if (!chessMatch.getCheckMate()) {
 		System.out.print("Wainting Player: " + chessMatch.getCurrentPlayer());
-		if (chessMatch.getCheck()) {
-			System.out.println();
-			System.out.println(ANSI_RED + chessMatch.getCurrentPlayer() + " in CHECK!" + ANSI_RESET);
+			if (chessMatch.getCheck()) {
+				System.out.println();
+				System.out.println(ANSI_RED + chessMatch.getCurrentPlayer() + " KING in CHECK!" + ANSI_RESET);
+			}
+		}
+		else {
+			System.out.println(ANSI_RED + "CHECKMATE!" + ANSI_RESET);
+			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
 		}
 	}
 
