@@ -121,4 +121,5 @@ public class UI {
 		System.out.print("White: " + ANSI_PURPLE + Arrays.toString(black.toArray()) + ANSI_RESET);
 		System.out.println();
 	}
+	
 }
