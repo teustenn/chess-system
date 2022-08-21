@@ -40,7 +40,11 @@ public class Program {
 				
 				if (chessMatch.getPromoted() != null) {
 					System.out.print("Piece for Promotion (B/H/R/Q): ");
-					String type = sc.nextLine();
+					String type = sc.nextLine().toUpperCase();
+					while (!type.equals("B") && !type.equals("H") && !type.equals("R") & !type.equals("Q")) {
+						System.out.print("Invalid Value! Piece for Promotion (B/H/R/Q): ");
+						type = sc.nextLine().toUpperCase();
+					}
 					chessMatch.replacePromotedPiece(type);
 				}
 			}
